@@ -1,0 +1,518 @@
+%diag.sty agosto 1998
+
+
+
+\lineskip 1pt \normallineskip 1pt
+
+\def\@normalsize{\@setsize\normalsize{13.6pt}\xipt\@xipt
+\abovedisplayskip 11pt plus3pt minus6pt\belowdisplayskip \abovedisplayskip
+\abovedisplayshortskip \z@ plus3pt\belowdisplayshortskip 6.5pt plus3.5pt
+minus3pt\let\@listi\@listI} 
+\def\small{\@setsize\small{12pt}\xpt\@xpt
+\abovedisplayskip 10pt plus2pt minus5pt\belowdisplayskip \abovedisplayskip
+\abovedisplayshortskip \z@ plus3pt\belowdisplayshortskip 6pt plus3pt minus3pt
+\def\@listi{\leftmargin\leftmargini \topsep 6pt plus 2pt minus 2pt\parsep 3pt
+plus 2pt minus 1pt
+\itemsep \parsep}}
+\def\footnotesize{\@setsize\footnotesize{11pt}\ixpt\@ixpt
+\abovedisplayskip 8pt plus 2pt minus 4pt\belowdisplayskip \abovedisplayskip
+\abovedisplayshortskip \z@ plus 1pt\belowdisplayshortskip 4pt plus 2pt minus
+2pt
+\def\@listi{\leftmargin\leftmargini \topsep 4pt plus 2pt minus 2pt\parsep 2pt
+plus 1pt minus 1pt
+\itemsep \parsep}}
+
+
+\def\@makechapterhead#1{ \vspace*{50pt} { \parindent 0pt \raggedright
+ \ifnum \c@secnumdepth >\m@ne \large\sf \@chapapp{} \thechapter \par
+ \vskip 20pt \fi \Large \bf #1\par
+ \nobreak \vskip 40pt } }
+
+%ridefinire se twocolumn
+\def\@makeschapterhead#1{ \vspace*{50pt} { \parindent 0pt \raggedright
+ \large \bf #1\par
+ \nobreak \vskip 40pt } }
+
+\def\@makeintrohead#1{ \vspace*{50pt} { \parindent 0pt \raggedright
+ \ifnum \c@secnumdepth >\m@ne   \par
+ \vskip 20pt \fi \Large \bf #1\par
+ \nobreak \vskip 40pt } }
+
+%ridefinire se twocolumn
+\def\@makesintrohead#1{ \vspace*{50pt} { \parindent 0pt \raggedright
+\large \bf #1\par
+\nobreak \vskip 40pt } }
+
+\def\chapter{\cleardoublepage
+%\thispagestyle{empty} pagine capitoli senza numero
+\thispagestyle{empty}
+\global\@topnum\z@
+\@afterindentfalse \secdef\@chapter\@schapter} 
+\def\@chapter[#1]#2{\ifnum \c@secnumdepth >\m@ne
+ \refstepcounter{chapter}
+ \typeout{\@chapapp\space\thechapter.}
+ \addcontentsline{toc}{chapter}{\protect
+ \numberline{\thechapter}#1}\else
+ \addcontentsline{toc}{chapter}{#1}\fi
+ \chaptermark{#1}
+ \addtocontents{lof}{\protect\addvspace{10pt}}
+\addtocontents{lot}{\protect\addvspace{10pt}} \if@twocolumn
+\@topnewpage[\@makechapterhead{#2}] 
+ \else \@makechapterhead{#2}
+ \@afterheading \fi} 
+\def\@schapter#1{\if@twocolumn \@topnewpage[\@makeschapterhead{#1}]
+ \else \@makeschapterhead{#1} 
+ \@afterheading\fi}
+
+
+\def\introduction{\cleardoublepage \thispagestyle{empty} \global\@topnum\z@
+\@afterindentfalse \secdef\@intro\@schapter} 
+\def\@intro[#1]#2{\ifnum \c@secnumdepth >\m@ne
+% \refstepcounter{chapter}
+% \typeout{\@chapapp\space\thechapter.}
+%\addcontentsline{toc}{chapter}{\protect
+% \numberline{\thechapter}#1}\else
+ \addcontentsline{toc}{chapter}{#1}\fi
+ \chaptermark{#1}
+ \addtocontents{lof}{\protect\addvspace{10pt}}
+\addtocontents{lot}{\protect\addvspace{10pt}} \if@twocolumn
+\@topnewpage[\@makechapterhead{#2}] 
+ \else \@makeintrohead{#2}
+ \@afterheading \fi} 
+\def\@schapter#1{\if@twocolumn \@topnewpage[\@makeschapterhead{#1}]
+ \else \@makesintrohead{#1} 
+ \@afterheading\fi}
+
+
+\def\section{\@startsection {section}{1}{\z@}{-3.5ex plus -1ex minus
+ -.2ex}{2.3ex plus .2ex}{\normalsize\sc}}
+\def\subsection{\@startsection{subsection}{2}{\z@}{-3.25ex plus -1ex minus
+ -.2ex}{1.5ex plus .2ex}{\normalsize\sl}}
+\def\subsubsection{\@startsection{subsubsection}{3}{\z@}{-3.25ex plus
+-1ex minus -.2ex}{1.5ex plus .2ex}{\normalsize\sl}}
+\def\paragraph{\@startsection
+ {paragraph}{4}{\z@}{3.25ex plus 1ex minus .2ex}{-1em}{\normalsize\bf}}
+\def\subparagraph{\@startsection
+ {subparagraph}{4}{\parindent}{3.25ex plus 1ex minus
+ .2ex}{-1em}{\normalsize\bf}}
+
+
+
+%%%%%%%%%%%%%%%%
+
+%\newcounter {part}
+\newcommand{\BIG}{\fontsize{48}{55}\selectfont}
+
+\renewcommand \thepart {\@Roman\c@part}
+\renewcommand\part{%
+  \if@openright
+    \cleardoublepage
+  \else
+    \clearpage
+  \fi
+  \thispagestyle{empty}%
+  \if@twocolumn
+    \onecolumn
+    \@tempswatrue
+  \else
+    \@tempswafalse
+  \fi
+  \null\vfil
+  \secdef\@part\@spart}
+
+\def\@part[#1]#2{%
+    \ifnum \c@secnumdepth >-2\relax
+      \refstepcounter{part}%
+      \addcontentsline{toc}{part}{\sc\thepart\hspace{1em}#1}%
+    \else
+      \addcontentsline{toc}{part}{#1}%
+    \fi
+    \markboth{}{}%
+    {\centering
+     \interlinepenalty \@M
+     \normalfont
+     \ifnum \c@secnumdepth >-2\relax
+       \Large\bfseries\sc \partname\nobreakspace\thepart
+       \par
+       \vskip 20\p@
+     \fi
+     \BIG \bfseries\sc #2\par}%
+    \@endpart}
+\def\@spart#1{%
+    {\centering
+     \interlinepenalty \@M
+     \normalfont
+     \BIG \bfseries\sc #1\par}%
+    \@endpart}
+\def\@endpart{\vfil\newpage
+              \if@twoside
+               \if@openright
+                \null
+                \thispagestyle{empty}%
+                \newpage
+               \fi
+              \fi
+              \if@tempswa
+                \twocolumn
+              \fi}
+
+%%%%%%%%%%%%%%%%
+
+\def\chaptermark#1{}
+
+\setcounter{secnumdepth}{2}
+
+\def\appendix{\par
+ \setcounter{chapter}{0}
+ \setcounter{section}{0}
+ \def\@chapapp{Appendice}
+ \def\thechapter{\Alph{chapter}}}
+
+
+\leftmargini 2.5em
+\leftmarginii 2.2em \leftmarginiii 1.87em \leftmarginiv 1.7em \leftmarginv 1em
+\leftmarginvi 1em
+\leftmargin\leftmargini
+\labelsep .5em
+\labelwidth\leftmargini\advance\labelwidth-\labelsep
+\def\@listI{\leftmargin\leftmargini \parsep 4.5pt plus 2pt minus 1pt\topsep
+9pt plus 3pt minus 5pt\itemsep 4.5pt plus 2pt minus 1pt}
+\let\@listi\@listI
+\@listi 
+\def\@listii{\leftmargin\leftmarginii
+ \labelwidth\leftmarginii\advance\labelwidth-\labelsep
+ \topsep 4.5pt plus 2pt minus 1pt
+ \parsep 2pt plus 1pt minus 1pt
+ \itemsep \parsep}
+\def\@listiii{\leftmargin\leftmarginiii
+ \labelwidth\leftmarginiii\advance\labelwidth-\labelsep
+ \topsep 2pt plus 1pt minus 1pt 
+ \parsep \z@ \partopsep 1pt plus 0pt minus 1pt
+ \itemsep \topsep}
+\def\@listiv{\leftmargin\leftmarginiv
+ \labelwidth\leftmarginiv\advance\labelwidth-\labelsep}
+\def\@listv{\leftmargin\leftmarginv
+ \labelwidth\leftmarginv\advance\labelwidth-\labelsep}
+\def\@listvi{\leftmargin\leftmarginvi
+ \labelwidth\leftmarginvi\advance\labelwidth-\labelsep}
+
+
+%***************************************
+\def\labelenumi{\theenumi.} 
+\def\theenumi{\arabic{chapter}.\arabic{enumi}} %%%GG 
+\def\labelenumii{(\theenumii)}
+\def\theenumii{\alph{enumii}}
+\def\p@enumii{\theenumi}
+\def\labelenumiii{\theenumiii.}
+\def\theenumiii{\roman{enumiii}}
+\def\p@enumiii{\theenumi(\theenumii)}
+\def\labelenumiv{\theenumiv.}
+\def\theenumiv{\Alph{enumiv}} 
+\def\p@enumiv{\p@enumiii\theenumiii}
+
+\def\labelitemi{$\bullet$}
+\def\labelitemii{\bf --}
+\def\labelitemiii{$\ast$}
+\def\labelitemiv{$\cdot$}
+
+\def\verse{\let\\=\@centercr 
+ \list{}{\itemsep\z@ \itemindent -1.5em\listparindent \itemindent 
+ \rightmargin\leftmargin\advance\leftmargin 1.5em}\item[]}
+\let\endverse\endlist
+\def\quotation{\list{}{\listparindent 1.5em
+ \itemindent\listparindent
+ \rightmargin\leftmargin\parsep 0pt plus 1pt}\item[]}
+\let\endquotation=\endlist
+\def\quote{\list{}{\rightmargin\leftmargin}\item[]}
+\let\endquote=\endlist
+
+\def\descriptionlabel#1{\hspace\labelsep \bf #1}
+\def\description{\list{}{\labelwidth\z@ \itemindent-\leftmargin
+ \let\makelabel\descriptionlabel}}
+\let\enddescription\endlist
+\newdimen\descriptionmargin
+\descriptionmargin=3em
+
+
+\arraycolsep 5pt \tabcolsep 6pt \arrayrulewidth .4pt \doublerulesep 2pt 
+\tabbingsep \labelsep 
+\skip\@mpfootins = \skip\footins
+\fboxsep = 3pt \fboxrule = .4pt
+
+\renewcommand{\theequation}{\arabic{chapter}.\arabic{equation}}
+
+
+%\def\thechapter {\small\arabic{chapter}}
+%con \small non funziona la reference sui capitoli e paragrafi..
+%da controllare
+\def\thechapter {\arabic{chapter}}
+\def\thesection {\thechapter.\arabic{section}}
+\def\thesubsection {\thesection.\arabic{subsection}}
+\def\thesubsubsection {\thesection.\thesubsection .\arabic{subsubsection}}
+\def\theparagraph {\thesubsubsection.\arabic{paragraph}}
+\def\thesubparagraph {\theparagraph.\arabic{subparagraph}}
+\def\@chapapp{CAPITOLO}
+
+\def\@pnumwidth{1.55em}
+\def\@tocrmarg {2.55em}
+\def\@dotsep{4.5}
+\setcounter{tocdepth}{2}
+
+\def\tableofcontents{\@restonecolfalse\if@twocolumn\@restonecoltrue\onecolumn
+ \fi\chapter*{Indice\@mkboth{Indice}{Indice}}
+%%% aggiunta
+\thispagestyle{empty} % toglie ``indice'' dalla prima pagine
+%%
+ \@starttoc{toc}\if@restonecol\twocolumn\fi}
+\def\l@part#1#2{\addpenalty{-\@highpenalty}
+ \addvspace{2.25em plus 1pt} \begingroup
+ \@tempdima 3em \parindent \z@ \rightskip \@pnumwidth \parfillskip
+-\@pnumwidth 
+ {\large \bf \leavevmode #1\hfil \hbox to\@pnumwidth{\hss #2}}\par
+ \nobreak \global\@nobreaktrue \everypar{\global\@nobreakfalse\everypar{}}
+\endgroup}
+\def\l@chapter#1#2{\addpenalty{-\@highpenalty} 
+ \vskip 1.0em plus 1pt \@tempdima 1.5em \begingroup
+ \parindent \z@ \rightskip \@pnumwidth 
+ \parfillskip -\@pnumwidth 
+ \bf \leavevmode \advance\leftskip\@tempdima \hskip -\leftskip #1\nobreak\hfil
+\nobreak\hbox to\@pnumwidth{\hss #2}\par
+ \penalty\@highpenalty \endgroup}
+
+\def\l@section{\@dottedtocline{1}{1.5em}{2.3em}}
+\def\l@subsection{\@dottedtocline{2}{3.8em}{3.2em}}
+\def\l@subsubsection{\@dottedtocline{3}{7.0em}{4.1em}}
+\def\l@paragraph{\@dottedtocline{4}{10em}{5em}}
+\def\l@subparagraph{\@dottedtocline{5}{12em}{6em}}
+\def\listoffigures{\@restonecolfalse\if@twocolumn\@restonecoltrue\onecolumn
+ \fi\chapter*{Elenco delle Figure\@mkboth
+ {Elenco delle Figure}{Elenco delle Figure}}\@starttoc{lof}\if@restonecol
+ \twocolumn\fi}
+\def\l@figure{\@dottedtocline{1}{1.5em}{2.3em}}
+\def\listoftables{\@restonecolfalse\if@twocolumn\@restonecoltrue\onecolumn
+ \fi\chapter*{Elenco delle Tabelle\@mkboth
+ {Elenco delle Tabelle}{Elenco delle Tabelle}}\@starttoc{lot}\if@restonecol
+ \twocolumn\fi}
+\let\l@table\l@figure
+
+\def\thebibliography#1{\chapter*{Bibliografia\@mkboth
+ {Bibliografia}{Bibliografia}}\list
+ {[\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
+ \advance\leftmargin\labelsep
+ \usecounter{enumi}}
+ \def\newblock{\hskip .11em plus .33em minus .07em}
+ \sloppy\clubpenalty4000\widowpenalty4000
+ \sfcode`\.=1000\relax}
+\let\endthebibliography=\endlist
+ 
+\newif\if@restonecol
+\def\theindex{\@restonecoltrue\if@twocolumn\@restonecolfalse\fi
+\columnseprule \z@
+\columnsep 35pt\twocolumn[\@makeschapterhead{Indice Analitico}]
+ \@mkboth{Indice Analitico}{Indice Analitico}\thispagestyle{empty}\parindent\z@
+ \parskip\z@ plus .3pt\relax\let\item\@idxitem}
+\def\@idxitem{\par\hangindent 40pt}
+\def\subitem{\par\hangindent 40pt \hspace*{20pt}}
+\def\subsubitem{\par\hangindent 40pt \hspace*{30pt}}
+\def\endtheindex{\if@restonecol\onecolumn\else\clearpage\fi}
+\def\indexspace{\par \vskip 10pt plus 5pt minus 3pt\relax}
+
+\def\footnoterule{\kern-3\p@
+ \hrule width .4\columnwidth 
+ \kern 2.6\p@} 
+\@addtoreset{footnote}{chapter} 
+\long\def\@makefntext#1{\parindent 1em\noindent 
+\hbox to 1.8em{\hss$^{\@thefnmark}$}#1}
+
+\setcounter{topnumber}{2}
+\def\topfraction{1}                     % {.7}
+\setcounter{bottomnumber}{1}
+\def\bottomfraction{1}                 % {.3}
+\setcounter{totalnumber}{3}
+\def\textfraction{0}                    % {.2}
+\def\floatpagefraction{0}               % {.5}
+\setcounter{dbltopnumber}{2}
+\def\dbltopfraction{1}                  % {.7}
+\def\dblfloatpagefraction{0}            % {.5}
+
+\long\def\@makecaption#1#2{
+ \vskip 10pt 
+ \setbox\@tempboxa\hbox{#1. #2}
+ \ifdim \wd\@tempboxa >\hsize #1.  #2\par \else \hbox %. nella caption
+to\hsize{\hfil\box\@tempboxa\hfil} 
+ \fi}
+
+
+\def\thefigure{\arabic{chapter}.\@arabic\c@figure}
+\def\fps@figure{tbp}
+\def\ftype@figure{1}
+\def\ext@figure{lof}
+\def\fnum@figure{Figura \thefigure}
+\def\figure{\@float{figure}}
+\let\endfigure\end@float
+\@namedef{figure*}{\@dblfloat{figure}}
+\@namedef{endfigure*}{\end@dblfloat}
+
+\def\thetable{\arabic{chapter}.\@arabic\c@table}
+\def\fps@table{tbp}
+\def\ftype@table{2}
+\def\ext@table{lot}
+\def\fnum@table{Table \thetable}
+\def\table{\@float{table}}
+\let\endtable\end@float
+\@namedef{table*}{\@dblfloat{table}}
+\@namedef{endtable*}{\end@dblfloat}
+
+\mark{{}{}}
+
+\newfont{\sss}{cmssq8} %font per le testatine pari "CAPITOLO"
+
+\def\ps@headings{\let\@mkboth\markboth
+\def\@oddfoot{}\def\@evenfoot{}\def\@evenhead{\rm \thepage\hfil \scriptsize
+\leftmark}\def\@oddhead{\hbox{}{\scriptsize \rightmark} \hfil
+\rm\thepage}
+\def\chaptermark##1{\markboth {{\ifnum \c@secnumdepth >\m@ne
+{\sss \@chapapp\ \thechapter} \ \fi ##1}}{}}\def\sectionmark##1{\markright
+{{\ifnum \c@secnumdepth >\z@
+ \thesection. \ \fi ##1}}}}
+
+\def\ps@myheadings{\let\@mkboth\@gobbletwo
+\def\@oddhead{\hbox{}{\scriptsize\rightmark} \hfil
+\rm\thepage}\def\@oddfoot{}\def\@evenhead{\rm \thepage\hfil\scriptsize\leftmark\hbox
+{}}\def\@evenfoot{}\def\chaptermark##1{}\def\sectionmark##1{}%
+\def\subsectionmark##1{}}
+
+\def\today{\ifcase\month\or
+ January\or February\or March\or April\or May\or June\or
+ July\or August\or September\or October\or November\or December\fi
+ \space\number\day, \number\year}
+\@addtoreset{equation}{chapter} 
+
+\ps@headings \pagenumbering{arabic} \onecolumn
+
+\sloppy
+\flushbottom
+
+
+%inizio dichiarazioni per il frontespizio
+
+\def\logoa#1{\gdef\@logoa{#1}}
+\gdef\@logoa{}
+\def\logob#1{\gdef\@logob{#1}}
+\gdef\@logob{}
+\def\occhiello#1{\gdef\@occhiello{#1}}
+\gdef\@occhiello{}
+\def\occhielloo#1{\gdef\@occhielloo{#1}}
+\gdef\@occhielloo{}
+\def\occhiellooo#1{\gdef\@occhiellooo{#1}}
+\gdef\@occhiellooo{}
+\def\titolo#1{\gdef\@titolo{#1}}
+\gdef\@titolo{}
+\def\titoloo#1{\gdef\@titoloo{#1}}
+\gdef\@titoloo{}
+\def\titolooo#1{\gdef\@titolooo{#1}}
+\gdef\@titolooo{}
+\def\autore#1{\gdef\@autore{#1}}
+\gdef\@autore{}
+\def\affiliazione#1{\gdef\@affiliazione{#1}}
+\gdef\@affiliazione{}
+\def\pubby#1{\gdef\@pubby{#1}}
+\gdef\@pubby{}
+\def\pubin#1{\gdef\@pubin{#1}}
+\gdef\@pubin{}
+\def\date#1{\gdef\@date{#1}}
+\gdef\@date{\today}
+\def\marchireg#1{\gdef\@marchireg{#1}}
+\gdef\@marchireg{}
+\def\Copyright#1{\gdef\@Copyright{#1}}
+\gdef\@Copyright{}
+\def\isbn#1{\gdef\@isbn{#1}}
+\gdef\@isbn{}
+\def\ristampa#1{\gdef\@ristampa{#1}}
+\gdef\@ristampa{}
+\def\finito#1{\gdef\@finito{#1}}
+\gdef\@finito{}
+
+\def\frontespizio{\par
+\begingroup
+\if@twocolumn
+\twocolumn[\@frontespizio]
+\else \newpage
+\global\@topnum\z@ \@frontespizio \fi\thispagestyle{plain}
+\endgroup
+
+\let\frontespizio\relax
+\let\@frontespizio\relax
+\gdef\@autore{}\gdef\@titolo{}\gdef\@affiliazione{}\gdef\@pubby{}
+\gdef\@pubin{}\gdef\@occhiello{}\gdef\@marchireg{}\gdef\@Copyright{}
+\gdef\@isbn{}\gdef\@ristampa{}\gdef\@finito{}}
+\gdef\@logoa{}
+\gdef\@logob{}
+
+\def\@frontespizio{
+
+\newpage
+\clearpage
+\setcounter{page}{0}
+\pagestyle{empty}
+\null
+\vfill
+\@logoa
+%end prima pagina
+
+\newpage
+\clearpage
+\setcounter{page}{0}
+\pagestyle{empty}
+%\begin{flushleft}
+\null
+\vfill
+\@marchireg
+\vskip 6cm                   %isbn
+{\noindent ISBN \@isbn}
+\vskip 1.2cm
+\@Copyright
+%\end{flushleft}
+\vskip .8cm
+\@logob
+\newpage
+\clearpage
+\setcounter{page}{0}
+\pagestyle{empty}
+\begin{center}
+\null                    %occhiello
+\huge \bf \sc \@autore \par \vskip 5mm
+\vskip 5cm
+{\Huge \bf \@occhiello}
+\vskip 2cm
+{ \huge \bf \@occhielloo}
+\end{center}
+%\newpage
+\pagestyle{headings}
+}
+
+%fine delle dichiarazioni per il frontespizio
+\def\tab{\phantom{10pt}}
+\def\spx{\phantom{2pt}}
+
+\def\btt#1{\let\@lscatola\relax 
+\vskip 1em \newlength{\@lscatola} 
+\setlength{\@lscatola}{\textwidth} 
+\addtolength{\@lscatola}{-8pt} 
+\noindent\hrule\noindent\vrule\kern3.6pt
+{\footnotesize\tt
+\parbox{\@lscatola}{#1}}
+\kern3.6pt\vrule\hrule} 
+
+
+\def\approxprop{%
+  \def\p{%
+    \setbox0=\vbox{\hbox{$\propto$}}%
+    \ht0=0.6ex \box0 }%
+  \def\s{%
+    \vbox{\hbox{$\sim$}}%
+  }%
+  \mathrel{\raisebox{0.7ex}{%
+      \mbox{$\underset{\s}{\p}$}%
+    }}%
+}

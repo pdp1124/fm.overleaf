@@ -1,0 +1,124 @@
+\documentclass[11pt,italian]{book}
+%\usepackage[a4paper,centering,paperwidth=17.9truecm, paperheight=25.1truecm]{geometry}
+\usepackage[text={5in,205mm},paperwidth=17.9truecm, paperheight=25.1truecm,centering]{geometry}
+\usepackage[italian]{babel}
+\topmargin -7mm
+\usepackage[a4,
+  % set width and height to a4 width and height + 6mm
+  % width=18truecm, height=24truecm,
+  % use any combination of these options to add different cut markings
+  %  cam, axes, frame, cross,
+  cross,
+  % set the type of TeX renderer you use
+  pdftex,
+  % center the contents
+  center,
+  noinfo
+]{crop}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\DeclareMathOperator{\atantwo}{atan2}
+\usepackage{fmta}
+%\usepackage{psfig}
+\usepackage{epsfig}
+\usepackage{wrapfig}
+\usepackage{mathabx}
+\usepackage[multiple]{footmisc}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage{makeidx}
+\usepackage{bm}
+\usepackage[makeroom]{cancel}
+\makeindex
+\usepackage[totoc]{indexgarz}
+%\usepackage[nottoc]{tocbibind}
+\begin{document}
+\renewcommand\indexname{Indice Analitico}
+
+\logoa{
+\begin{center}
+\includegraphics[width=0.16\textwidth]{logoMUP.pdf}
+\end{center}
+}
+\logob{
+%\begin{center}
+\noindent MUP Editore \`e il marchio editoriale di Monteparmaservizi Srl,\\
+\noindent impresa strumentale della\\ \vskip 0mm
+\noindent \includegraphics[width=0.3\textwidth]{logofond.pdf}
+\vskip -8.5mm \hfill www.mupeditore.it
+\null
+\vskip 5mm
+\null
+%\end{center}
+}
+
+\autore{Rinaldo Garziera}
+%\affiliazione{Dipartimento di Ingegneria e Architettura \\
+%             Universit\`a di Parma }
+%\titolo{Meccanica delle Macchine}
+%\titolooo{ \em Cinematica}
+
+%\pubby{MUP}
+%\pubin{{\sf Parma}}
+%\date{2022}
+\marchireg{\noindent Stampato con un Contributo del Dipartimento di Ingegneria e Architettura dell'Universit\`a di Parma.
+\newline
+\newline
+\noindent Il testo e le figure sono stati composti usando i 
+programmi \LaTeX, \TeX, Vectornator, GNU C, Ghostscript, Gnuplot e Octave.
+ }
+\Copyright{\noindent {\copyright \hskip 1 mm 2023 \hskip 3mm Monte Universit\`a Parma Editore} \\ 
+\vskip 2mm \noindent {\em Nessuna parte di questo libro pu\`o
+essere riprodotta o trasmessa in qualsiasi forma o
+con qualsiasi mezzo elettronico, meccanico o altro senza
+l'autorizzazione scritta dei proprietari dei diritti e
+dell'editore.}}
+\isbn{978--88--7847--634--9}
+\ristampa{}
+%\finito{{\sf Finito di stampare a Parma. 2022.}}
+
+\occhiello{Meccanica delle Macchine}
+\occhielloo{Cinematica}
+\frontespizio
+\thispagestyle{empty}
+\vfill
+\begin{center}
+\includegraphics[width=0.16\textwidth]{logoMUP.pdf}
+\end{center}
+\null
+\newpage
+\thispagestyle{empty}
+\null
+\newpage
+\pagenumbering{gobble}
+\pagestyle{headings}
+\tableofcontents
+\newpage
+\null
+\pagestyle{plain}
+\newpage
+\pagestyle{empty}
+\hphantom{1 pt}
+\vspace{1 in}
+\begin{flushright}
+Questo lavoro \`e dedicato al ricordo del professor Franco Giordana.
+Senza i suoi consigli e il suo affettuoso  incoraggiamento
+il presente volume non avrebbe avuto luce di stampa.
+Un particolare ringraziamento va al professor Alessandro Tasora, per suoi preziosi suggerimenti.
+\end{flushright}
+\newpage
+\null
+\newpage
+\pagestyle{headings}
+\pagenumbering{arabic}
+
+\input{part0/fmta0.tex}
+\input{part1/part1.tex}
+\input{part2/part2.tex}
+\input{part3/part3.tex}
+\input{biblio/biblio.tex}
+\printindex
+
+
+\end{document}
